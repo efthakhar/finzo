@@ -1,7 +1,7 @@
 
 ## Invextry
 
-Invextry is a simple inventory management solution created with laravel and vue js. 
+A simple expense and income tracker with laravel and vuejs 
 
 
 ## Contributors
