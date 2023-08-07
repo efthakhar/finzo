@@ -15,13 +15,13 @@ class UserController extends Controller
 
         return response()->json([
             'id' => $user_id,
-            'authenticated'=> 1,
+            'authenticated' => 1,
             'user' => [
                 'id' => $user->id,
                 'name' => $user->name,
                 'user_name' => $user->user_name,
                 'email' => $user->email,
-            ], 
+            ],
         ]);
     }
 }
