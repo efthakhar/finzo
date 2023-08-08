@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\IncomeController;
 use App\Http\Controllers\Api\User\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -44,7 +45,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/api/users/authenticated-user', [UserController::class, 'getAuthenticatedUser']);
 
     // income
-    // Route::get('/api/incomes', [IncomeController::class, 'index']);
+    Route::get('/api/incomes', [IncomeController::class, 'index']);
     // Route::get('/api/incomes/{id}', [IncomeController::class, 'show']);
     // Route::post('/apiincomeds', [IncomeController::class, 'store']);
     // Route::put('/api/incomes/{id}', [IncomeController::class, 'update']);

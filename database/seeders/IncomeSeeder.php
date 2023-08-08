@@ -35,6 +35,15 @@ class IncomeSeeder extends Seeder
             'amount' => 12000,
         ],
 
+        [
+            'id' => 4,
+            'title' => 'get payment for logo design',
+            'date' => '2023-12-7',
+            'description' => '',
+            'category' => 3,
+            'amount' => 3000,
+        ],
+
     ];
 
     public function run(): void
