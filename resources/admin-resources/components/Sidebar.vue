@@ -14,7 +14,7 @@ const navlinks = [
     {
         label: "income",
         link: "/admin/incomes",
-        icon_name: "dashboard-svg-icon",
+        icon_name: "wallet-svg-icon",
         sub_links: [
             {
                 label: "income list",
