@@ -18,12 +18,14 @@ const router = createRouter({
                         import("../modules/dashboard/Dashboard.vue"),
                 },
          
-                // // Expanse Route
-                // {
-                //     name: "expanse",
-                //     path: "expanse",
-                //     component: () => import("../modules/expanse/Expanses.vue"),
-                // },
+                // Incomes Route
+                {
+                    name: "incomes",
+                    path: "incomes",
+                    component: () => import("../modules/income/Incomes.vue"),
+                },
+
+
 
             ],
         },

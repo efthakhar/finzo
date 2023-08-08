@@ -31,7 +31,7 @@ class IncomeSeeder extends Seeder
             'title' => 'earned dollar from fiverr',
             'date' => '2023-7-7',
             'description' => '',
-            'category' => 3,
+            'category' => [2,3],
             'amount' => 12000,
         ],
 

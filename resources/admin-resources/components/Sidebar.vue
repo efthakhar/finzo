@@ -12,7 +12,7 @@ const navlinks = [
     },
 
     {
-        label: "incomes",
+        label: "income",
         link: "/admin/incomes",
         icon_name: "dashboard-svg-icon",
         sub_links: [
