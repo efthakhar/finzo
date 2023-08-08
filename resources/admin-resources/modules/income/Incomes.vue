@@ -4,6 +4,7 @@ import Loader from "../../components/shared/loader/Loader.vue";
 import Pagination from "../../components/shared/pagination/Pagination.vue";
 import { useConfirmStore } from "../../components/shared/confirm-alert/confirmStore.js";
 import { useIncomeStore } from "./incomeStore";
+import { useIncomeCategoryStore } from "../income-category/incomeCategoryStore";
 import BinSvgIcon from "../../assets/icons/bin-svg-icon.vue";
 import EditSvgIcon from "../../assets/icons/edit-svg-icon.vue";
 import ViewSvgIcon from "../../assets/icons/view-svg-icon.vue";
@@ -23,6 +24,8 @@ const showViewIncome = ref(false);
 const incomeStore = useIncomeStore();
 const confirmStore = useConfirmStore();
 const incomes = computed(() => incomeStore.incomes);
+const incomeCategoryStore = useIncomeCategoryStore();
+const incomeCategories = ref([]);
 const q_title = ref("");
 const selected_incomes = ref([]);
 const all_selectd = ref(false);
@@ -91,8 +94,11 @@ async function fetchData(
     }
 }
 
-onMounted(() => {
+onMounted(async () => {
     fetchData(1);
+    incomeCategoryStore.fetchCatList().then((response) => {
+        incomeCategories.value = response;
+    });
 });
 </script>
 
@@ -112,15 +118,99 @@ onMounted(() => {
         <div class="p-1 my-2" v-if="filterTab">
             <div class="row">
                 <div class="col-md-3 col-sm-6 my-1">
-                    <div class="input-group">
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="type name.."
+                        v-model="q_title"
+                        @keyup="fetchData(1, incomeStore.limit, q_title)"
+                    />
+                </div>
+                <div class="col-md-3 col-sm-6 my-1">
+                    <select
+                        class="form-select"
+                        v-model="incomeStore.q_category"
+                        @change="fetchData(1)"
+                    >
+                        <option value="">select category</option>
+                        <option
+                            :key="incomeCategory.id"
+                            :value="incomeCategory.id"
+                            v-for="incomeCategory in incomeCategories"
+                        >
+                            {{ incomeCategory.name }}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-md-3 col-sm-6 my-1">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text">From</span>
                         <input
-                            type="text"
+                            type="date"
                             class="form-control"
-                            placeholder="type name.."
-                            v-model="q_title"
-                            @keyup="fetchData(1, incomeStore.limit, q_title)"
+                            @change="fetchData(1)"
+                            v-model="incomeStore.q_start_date"
                         />
-                        <!-- <label class="input-group-text">sarch</label> -->
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 my-1">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text">To</span>
+                        <input
+                            type="date"
+                            class="form-control"
+                            @change="fetchData(1)"
+                            v-model="incomeStore.q_end_date"
+                        />
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 my-1">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text">Min Amount</span>
+                        <input
+                            type="number"
+                            class="form-control"
+                            @input="fetchData(1)"
+                            v-model="incomeStore.q_start_amount"
+                        />
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 my-1">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text">Max Amount</span>
+                        <input
+                            type="number"
+                            class="form-control"
+                            @input="fetchData(1)"
+                            v-model="incomeStore.q_end_amount"
+                        />
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 my-1">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text">Sort By</span>
+                        <select
+                            class="form-select"
+                            v-model="incomeStore.q_sort_column"
+                            @change="fetchData(1)"
+                        >
+                            <option value="id">Default</option>
+                            <option value="date">Date</option>
+                            <option value="amount">Amount</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 my-1">
+                    <div class="input-group input-group-sm mb-3">
+                        <span class="input-group-text">order</span>
+                        <select
+                            class="form-select"
+                            v-model="incomeStore.q_sort_order"
+                            @change="fetchData(1)"
+                        >
+                            <option value="desc">desc</option>
+                            <option value="asc">asc</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -145,6 +235,7 @@ onMounted(() => {
                         <th>Title</th>
                         <th>Amount</th>
                         <th>Category</th>
+                        <th>Date</th>
                         <th class="table-action-col">Action</th>
                     </tr>
                 </thead>
@@ -169,6 +260,7 @@ onMounted(() => {
                                 {{ income_cat.name }}
                             </span>
                         </td>
+                        <td class="min100 max100">{{ income.date }}</td>
                         <td class="table-action-btns">
                             <ViewSvgIcon
                                 color="#00CFDD"

@@ -18,11 +18,11 @@ class IncomeController extends Controller
 
         $title = $request->query('title');
 
-        $date_start = $request->query('date_start');
-        $date_end = $request->query('date_end');
+        $start_date = $request->query('start_date');
+        $end_date = $request->query('end_date');
 
-        $amount_start = $request->query('amount_start');
-        $amount_end = $request->query('amount_end');
+        $start_amount = $request->query('start_amount');
+        $end_amount = $request->query('end_amount');
 
         $category_id = $request->query('category');
 
@@ -31,17 +31,17 @@ class IncomeController extends Controller
         $incomes->when($title, function ($query, $title) {
             $query->where('title', 'LIKE', '%'.$title.'%');
         })
-            ->when($date_start, function ($query, $date_start) {
-                $query->whereDate('date', '>=', $date_start);
+            ->when($start_date, function ($query, $start_date) {
+                $query->whereDate('date', '>=', $start_date);
             })
-            ->when($date_end, function ($query, $date_end) {
-                $query->whereDate('date', '>=', $date_end);
+            ->when($end_date, function ($query, $end_date) {
+                $query->whereDate('date', '<=', $end_date);
             })
-            ->when($amount_start, function ($query, $amount_start) {
-                $query->where('amount', '>=', $amount_start);
+            ->when($start_amount, function ($query, $start_amount) {
+                $query->where('amount', '>=', $start_amount);
             })
-            ->when($amount_end, function ($query, $amount_end) {
-                $query->where('amount', '>=', $amount_end);
+            ->when($end_amount, function ($query, $end_amount) {
+                $query->where('amount', '<=', $end_amount);
             })
             ->when($category_id, function ($query, $category_id) {
                 $query->whereHas('categories', function ($query) use ($category_id) {

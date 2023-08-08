@@ -15,7 +15,7 @@ export const useIncomeStore = defineStore("income", {
         q_end_amount: "",
         q_start_date: "",
         q_end_date: "",
-        q_sort_column: "",
+        q_sort_column: "id",
         q_sort_order: "desc",
 
         incomes: [],
