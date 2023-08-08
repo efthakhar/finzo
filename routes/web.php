@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Category\IncomeCategoryController;
 use App\Http\Controllers\Api\IncomeController;
 use App\Http\Controllers\Api\User\UserController;
 use App\Http\Controllers\Auth\LoginController;
@@ -43,6 +44,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     // User
     Route::get('/api/users/authenticated-user', [UserController::class, 'getAuthenticatedUser']);
+
+    // income
+    Route::get('/api/income-categories', [IncomeCategoryController::class, 'getIncomeCategoryList']);
 
     // income
     Route::get('/api/incomes', [IncomeController::class, 'index']);
