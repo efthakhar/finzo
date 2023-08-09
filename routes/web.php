@@ -64,11 +64,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     // expense category
     Route::get('/api/expense-categories/list', [ExpenseCategoryController::class, 'getExpenseCategoryList']);
-    Route::get('/api/expense-categories', [IncomeCategoryController::class, 'index']);
-    Route::get('/api/expense-categories/{id}', [IncomeCategoryController::class, 'show']);
-    Route::post('/api/expense-categories', [IncomeCategoryController::class, 'store']);
-    Route::put('/api/expense-categories/{id}', [IncomeCategoryController::class, 'update']);
-    Route::delete('/api/expense-categories/{id}', [IncomeCategoryController::class, 'delete']);
+    Route::get('/api/expense-categories', [ExpenseCategoryController::class, 'index']);
+    Route::get('/api/expense-categories/{id}', [ExpenseCategoryController::class, 'show']);
+    Route::post('/api/expense-categories', [ExpenseCategoryController::class, 'store']);
+    Route::put('/api/expense-categories/{id}', [ExpenseCategoryController::class, 'update']);
+    Route::delete('/api/expense-categories/{id}', [ExpenseCategoryController::class, 'delete']);
 
     // expense
     Route::get('/api/expenses', [ExpenseController::class, 'index']);

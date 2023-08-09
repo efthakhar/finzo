@@ -32,6 +32,20 @@ const router = createRouter({
                 },
 
 
+                // Expenses Route
+                {
+                    name: "expenses",
+                    path: "expenses",
+                    component: () => import("../modules/expense/Expenses.vue"),
+                },
+                // Expenses Category Route
+                {
+                    name: "expense_categories",
+                    path: "expense-categories",
+                    component: () => import("../modules/expense-category/ExpenseCategories.vue"),
+                },
+
+
 
             ],
         },
