@@ -37,8 +37,8 @@ class RegisterController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // assing created user to subscriber role
-        $user->assignRole('subscriber');
+        
+        //$user->assignRole('subscriber');
 
         if ($user) {
             //return redirect('/login');

@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Category\ExpenseCategoryController;
 use App\Http\Controllers\Api\Category\IncomeCategoryController;
 use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\IncomeController;
+use App\Http\Controllers\Api\ReportController;
 use App\Http\Controllers\Api\User\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    echo 'hello welcome to invextry';
+    return redirect('login');
 })->name('home');
 
 // create demo site
@@ -76,5 +77,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/api/expenses', [ExpenseController::class, 'store']);
     Route::put('/api/expenses/{id}', [ExpenseController::class, 'update']);
     Route::delete('/api/expenses/{id}', [ExpenseController::class, 'delete']);
+
+    // Dashboard Reports
+    Route::get('/api/dashboard-reports', [ReportController::class, 'getDashBoardReports']);
 
 });
