@@ -12,7 +12,7 @@ import AddNewButton from "../../components/buttons/AddNewButton.vue";
 import FilterButton from "../../components/buttons/FilterButton.vue";
 import BulkDeleteButton from "../../components/buttons/BulkDeleteButton.vue";
 import AddIncome from "./AddIncome.vue";
-// import EditIncome from "./EditIncome.vue";
+import EditIncome from "./EditIncome.vue";
 // import ViewIncome from "./ViewIncome.vue";
 
 const loading = ref(false);
@@ -253,11 +253,11 @@ onMounted(async () => {
                         <td class="min100 max100">{{ income.amount }}</td>
                         <td class="min200 max200">
                             <span
-                                :key="income_cat.id"
+                                :key="income_cat.value"
                                 v-for="income_cat in income.categories"
                                 class="badge bg-primary m-1 px-2 shadow-sm py-1"
                             >
-                                {{ income_cat.name }}
+                                {{ income_cat.label }}
                             </span>
                         </td>
                         <td class="min100 max100">{{ income.date }}</td>
@@ -291,17 +291,18 @@ onMounted(async () => {
         />
         <div class="modals-container">
             <AddIncome
-                :categories="incomeCategories"
                 v-if="showAddIncome"
+                :categories="incomeCategories"
                 @close="showAddIncome = false"
                 @refreshData="fetchData(1)"
             />
-            <!-- <EditIncome
+            <EditIncome
                 v-if="showEditIncome"
                 :income_id="incomeStore.edit_income_id"
+                :categories="incomeCategories"
                 @close="showEditIncome = false"
                 @refreshData="fetchData(incomeStore.current_page)"
-            /> -->
+            />
             <!-- <ViewIncome
                 v-if="showViewIncome"
                 :income_id="incomeStore.view_income_id"

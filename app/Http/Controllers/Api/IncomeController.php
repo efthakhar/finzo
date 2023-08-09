@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Income\CreateIncomeRequest;
+use App\Http\Requests\Income\UpdateIncomeRequest;
 use App\Http\Resources\Income\IncomeResource;
 use App\Models\Income;
 use Exception;
@@ -57,14 +58,12 @@ class IncomeController extends Controller
         return IncomeResource::collection($incomes);
     }
 
-    // public function show($brand_id)
-    // {
-    //     $this->authorize('view_brand');
+    public function show($income_id)
+    {
+        $income = Income::where('id', $income_id)->with('categories')->first();
 
-    //     $brand = Brand::where('id', $brand_id)->withMedia(['logo'])->first();
-
-    //     return new BrandResource($brand);
-    // }
+        return new IncomeResource($income);
+    }
 
     public function store(CreateIncomeRequest $request)
     {
@@ -93,30 +92,38 @@ class IncomeController extends Controller
         ], 201);
     }
 
-    // public function update(UpdateBrandRequest $request, $brand_id)
-    // {
+    public function update(UpdateIncomeRequest $request, $income_id)
+    {
 
-    //     try {
+        try {
 
-    //         $brand = Brand::find($brand_id);
-    //         $brand->update($request->validated());
-    //         $brand->detachMediaTags('logo');
-    //         $brand->attachMedia($request->logo, 'logo');
+            $income = Income::find($income_id);
 
-    //     } catch (Exception $e) {
+            $income->title = $request->validated('title');
+            $income->date = $request->validated('date');
+            $income->amount = $request->validated('amount');
+            $income->description = $request->validated('description');
 
-    //         return response()->json([
-    //             'status' => 'error',
-    //             'message' => 'failed to update brand',
-    //         ], 500);
+            $income->save();
 
-    //     }
+            $income->categories()->detach();
+            $income->categories()->attach($request->validated('categories'));
 
-    //     return response()->json([
-    //         'status' => 'success',
-    //         'message' => 'brand updated succesfully',
-    //     ], 200);
-    // }
+        } catch (Exception $e) {
+
+            return response()->json([
+                'status' => 'error',
+                'message' => 'failed to update income',
+                'error' => $e->getMessage(),
+            ], 500);
+
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'income updated succesfully',
+        ], 200);
+    }
 
     public function delete($ids)
     {

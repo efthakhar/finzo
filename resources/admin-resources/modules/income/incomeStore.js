@@ -75,32 +75,23 @@ export const useIncomeStore = defineStore("income", {
             });
         },
 
-        // fetchBrandList() {
-        //     return new Promise((resolve, reject) => {
-        //         axios
-        //             .get(`/api/incomes`)
-        //             .then((response) => {
-        //                 resolve(response.data.data);
-        //             })
-        //             .catch((errors) => {
-        //                 reject(errors);
-        //             });
-        //     });
-        // },
-
-        // async fetchBrand(id) {
-        //     return new Promise((resolve, reject) => {
-        //         axios
-        //             .get(`/api/incomes/${id}`)
-        //             .then((response) => {
-        //                 this.current_income_item = response.data.data;
-        //                 resolve(response.data.data);
-        //             })
-        //             .catch((errors) => {
-        //                 reject(errors);
-        //             });
-        //     });
-        // },
+        async fetchIncome(id) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .get(`/api/incomes/${id}`)
+                    .then((response) => {
+                        this.current_income_item = response.data.data;
+                        this.current_income_item.categories =
+                            this.current_income_item.categories.map(
+                                (item) => item.value
+                            );
+                        resolve(response.data.data);
+                    })
+                    .catch((errors) => {
+                        reject(errors);
+                    });
+            });
+        },
 
         async addIncome(data) {
             return new Promise((resolve, reject) => {
@@ -135,36 +126,36 @@ export const useIncomeStore = defineStore("income", {
             });
         },
 
-        // async editBrand(data) {
-        //     return new Promise((resolve, reject) => {
-        //         data.logo = data.logo.map((jsonObj) => jsonObj["id"]);
-        //         axios
-        //             .put(`/api/incomes/${this.edit_income_id}`, data)
-        //             .then((response) => {
-        //                 this.resetCurrentBrandData();
-        //                 const notifcationStore = useNotificationStore();
-        //                 notifcationStore.pushNotification({
-        //                     message: "income updated successfully",
-        //                     type: "success",
-        //                 });
-        //                 resolve(response);
-        //             })
-        //             .catch((errors) => {
-        //                 const notifcationStore = useNotificationStore();
-        //                 notifcationStore.pushNotification({
-        //                     message: "Error Occurred",
-        //                     type: "error",
-        //                 });
+        async editIncome(data) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .put(`/api/incomes/${this.edit_income_id}`, data)
+                    .then((response) => {
+                        this.resetCurrentIncomeData();
+                        const notifcationStore = useNotificationStore();
+                        notifcationStore.pushNotification({
+                            message: "income record updated successfully",
+                            type: "success",
+                        });
+                        resolve(response);
+                    })
+                    .catch((errors) => {
+                        console.log(errors);
+                        const notifcationStore = useNotificationStore();
+                        notifcationStore.pushNotification({
+                            message: "Error Occurred",
+                            type: "error",
+                        });
 
-        //                 if (errors.response.status == 422) {
-        //                     this.edit_income_errors = formatValidationErrors(
-        //                         errors.response.data.errors
-        //                     );
-        //                 }
-        //                 reject(errors);
-        //             });
-        //     });
-        // },
+                        if (errors.response.status == 422) {
+                            this.edit_income_errors = formatValidationErrors(
+                                errors.response.data.errors
+                            );
+                        }
+                        reject(errors);
+                    });
+            });
+        },
 
         async deleteIncome(id) {
             return new Promise((resolve, reject) => {

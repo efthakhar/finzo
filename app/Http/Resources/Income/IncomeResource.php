@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Income;
 
-use App\Http\Resources\Category\CategoryResource;
+use App\Http\Resources\Category\CategoryDropdownResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -16,7 +16,7 @@ class IncomeResource extends JsonResource
             'date' => $this->date,
             'amount' => $this->amount,
             'description' => $this->description,
-            'categories' => CategoryResource::collection($this->categories),
+            'categories' => CategoryDropdownResource::collection($this->categories),
         ];
     }
 }
