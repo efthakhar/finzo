@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Api\Category\IncomeCategoryController;
 use App\Http\Controllers\Api\IncomeController;
+use App\Http\Controllers\Api\Category\ExpenseCategoryController;
+use App\Http\Controllers\Api\ExpenseController;
 use App\Http\Controllers\Api\User\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -59,5 +61,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/api/incomes', [IncomeController::class, 'store']);
     Route::put('/api/incomes/{id}', [IncomeController::class, 'update']);
     Route::delete('/api/incomes/{id}', [IncomeController::class, 'delete']);
+
+
+    // expense category
+    Route::get('/api/expense-categories/list', [ExpenseCategoryController::class, 'getExpenseCategoryList']);
+    Route::get('/api/expense-categories', [IncomeCategoryController::class, 'index']);
+    Route::get('/api/expense-categories/{id}', [IncomeCategoryController::class, 'show']);
+    Route::post('/api/expense-categories', [IncomeCategoryController::class, 'store']);
+    Route::put('/api/expense-categories/{id}', [IncomeCategoryController::class, 'update']);
+    Route::delete('/api/expense-categories/{id}', [IncomeCategoryController::class, 'delete']);
+
+    // expense
+    Route::get('/api/expenses', [ExpenseController::class, 'index']);
+    Route::get('/api/expenses/{id}', [ExpenseController::class, 'show']);
+    Route::post('/api/expenses', [ExpenseController::class, 'store']);
+    Route::put('/api/expenses/{id}', [ExpenseController::class, 'update']);
+    Route::delete('/api/expenses/{id}', [ExpenseController::class, 'delete']);
 
 });
