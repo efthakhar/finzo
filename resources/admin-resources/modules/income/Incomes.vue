@@ -16,7 +16,7 @@ import AddIncome from "./AddIncome.vue";
 // import ViewIncome from "./ViewIncome.vue";
 
 const loading = ref(false);
-const filterTab = ref(false);
+const filterTab = ref(true);
 const showAddIncome = ref(false);
 const showEditIncome = ref(false);
 const showViewIncome = ref(false);
@@ -134,11 +134,11 @@ onMounted(async () => {
                     >
                         <option value="">select category</option>
                         <option
-                            :key="incomeCategory.id"
-                            :value="incomeCategory.id"
+                            :key="incomeCategory.value"
+                            :value="incomeCategory.value"
                             v-for="incomeCategory in incomeCategories"
                         >
-                            {{ incomeCategory.name }}
+                            {{ incomeCategory.label }}
                         </option>
                     </select>
                 </div>

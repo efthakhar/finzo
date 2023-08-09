@@ -69,21 +69,21 @@ class IncomeController extends Controller
     public function store(CreateIncomeRequest $request)
     {
         try {
-           
-            $income         = new Income();
-            $income->title  = $request->validated('title');
-            $income->date  = $request->validated('date');
-            $income->amount  = $request->validated('amount');
-            $income->description  = $request->validated('description');
+
+            $income = new Income();
+            $income->title = $request->validated('title');
+            $income->date = $request->validated('date');
+            $income->amount = $request->validated('amount');
+            $income->description = $request->validated('description');
 
             $income->save();
             $income->categories()->attach($request->validated('categories'));
-            
+
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'failed to create income item',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
 
@@ -120,7 +120,7 @@ class IncomeController extends Controller
 
     public function delete($ids)
     {
-       
+
         $ids = explode(',', $ids);
 
         try {
@@ -129,7 +129,7 @@ class IncomeController extends Controller
             return response()->json([
                 'status' => 'error',
                 'message' => 'failed to delete income item',
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ], 500);
         }
 
