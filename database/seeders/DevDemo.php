@@ -22,12 +22,14 @@ class DevDemo extends Seeder
         DB::table('categories')->truncate();
         DB::table('categorizables')->truncate();
         DB::table('incomes')->truncate();
+        DB::table('expenses')->truncate();
 
         // seed data
         $this->call([
             DemoUserSeeder::class,
             CategorySeeder::class,
             IncomeSeeder::class,
+            ExpenseSeeder::class,
         ]);
 
         Schema::enableForeignKeyConstraints();

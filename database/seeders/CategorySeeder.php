@@ -12,7 +12,7 @@ class CategorySeeder extends Seeder
         ['id' => 2, 'name' => 'job', 'category_type' => 'income'],
         ['id' => 3, 'name' => 'freelancing', 'category_type' => 'income'],
         ['id' => 4, 'name' => 'house rental', 'category_type' => 'expense'],
-        ['id' => 5, 'name' => 'car wash', 'category_type' => 'expense'],
+        ['id' => 5, 'name' => 'refreshment', 'category_type' => 'expense'],
         ['id' => 6, 'name' => 'buying book', 'category_type' => 'expense'],
     ];
 
