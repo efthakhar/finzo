@@ -111,9 +111,10 @@ export const useExpenseCategoryStore = defineStore("expense_category", {
                         });
 
                         if (error.response.status == 422) {
-                            this.add_expense_errors = formatValidationErrors(
-                                error.response.data.errors
-                            );
+                            this.add_expense_category_errors =
+                                formatValidationErrors(
+                                    error.response.data.errors
+                                );
                         }
                         reject(error);
                     });
@@ -123,7 +124,10 @@ export const useExpenseCategoryStore = defineStore("expense_category", {
         async editExpenseCat(data) {
             return new Promise((resolve, reject) => {
                 axios
-                    .put(`/api/expense-categories/${this.edit_expense_category_id}`, data)
+                    .put(
+                        `/api/expense-categories/${this.edit_expense_category_id}`,
+                        data
+                    )
                     .then((response) => {
                         this.resetCurrentExpenseCatData();
                         const notifcationStore = useNotificationStore();
@@ -142,9 +146,10 @@ export const useExpenseCategoryStore = defineStore("expense_category", {
                         });
 
                         if (errors.response.status == 422) {
-                            this.edit_expense_errors = formatValidationErrors(
-                                errors.response.data.errors
-                            );
+                            this.edit_expense_category_errors =
+                                formatValidationErrors(
+                                    errors.response.data.errors
+                                );
                         }
                         reject(errors);
                     });
