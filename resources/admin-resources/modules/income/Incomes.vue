@@ -13,7 +13,7 @@ import FilterButton from "../../components/buttons/FilterButton.vue";
 import BulkDeleteButton from "../../components/buttons/BulkDeleteButton.vue";
 import AddIncome from "./AddIncome.vue";
 import EditIncome from "./EditIncome.vue";
-// import ViewIncome from "./ViewIncome.vue";
+import ViewIncome from "./ViewIncome.vue";
 
 const loading = ref(false);
 const filterTab = ref(true);
@@ -303,11 +303,11 @@ onMounted(async () => {
                 @close="showEditIncome = false"
                 @refreshData="fetchData(incomeStore.current_page)"
             />
-            <!-- <ViewIncome
+            <ViewIncome
                 v-if="showViewIncome"
                 :income_id="incomeStore.view_income_id"
                 @close="showViewIncome = false"
-            /> -->
+            />
         </div>
     </div>
 </template>

@@ -81,8 +81,12 @@ export const useIncomeStore = defineStore("income", {
                     .get(`/api/incomes/${id}`)
                     .then((response) => {
                         this.current_income_item = response.data.data;
+
+                        this.current_income_item.categories_details =
+                            response.data.data.categories;
+
                         this.current_income_item.categories =
-                            this.current_income_item.categories.map(
+                            response.data.data.categories.map(
                                 (item) => item.value
                             );
                         resolve(response.data.data);
