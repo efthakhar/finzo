@@ -30,15 +30,29 @@ export const useIncomeStore = defineStore("income", {
         current_income_item: {
             id: "",
             title: "",
-            amount: 0,
+            amount: "",
             date: "",
             description: "",
+            categories: "",
         },
     }),
 
     getters: {},
 
     actions: {
+        resetCurrentIncomeData() {
+            this.current_income_item = {
+                id: "",
+                title: "",
+                amount: "",
+                date: "",
+                description: "",
+                categories: "",
+            };
+            this.add_income_errors = [];
+            this.edit_income_errors = [];
+        },
+
         fetchIncomes(page, limit, q_title = "") {
             return new Promise((resolve, reject) => {
                 axios
@@ -59,18 +73,6 @@ export const useIncomeStore = defineStore("income", {
                         reject(errors);
                     });
             });
-        },
-
-        resetCurrentIncomeData() {
-            this.current_income_item = {
-                id: "",
-                title: "",
-                amount: 0,
-                date: "",
-                description: "",
-            };
-            this.add_income_errors = [];
-            this.edit_income_errors = [];
         },
 
         // fetchBrandList() {
@@ -100,39 +102,38 @@ export const useIncomeStore = defineStore("income", {
         //     });
         // },
 
-        // async addBrand(data) {
-        //     return new Promise((resolve, reject) => {
-        //         data.logo = data.logo.map((jsonObj) => jsonObj["id"]);
-        //         axios
-        //             .post(`/api/incomes`, data)
-        //             .then((response) => {
-        //                 this.resetCurrentBrandData();
-        //                 const notifcationStore = useNotificationStore();
-        //                 notifcationStore.pushNotification({
-        //                     message: "Brand Added Successfully",
-        //                     type: "success",
-        //                     time: 2000,
-        //                 });
+        async addIncome(data) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .post(`/api/incomes`, data)
+                    .then((response) => {
+                        this.resetCurrentIncomeData();
+                        const notifcationStore = useNotificationStore();
+                        notifcationStore.pushNotification({
+                            message: "Income Added Successfully",
+                            type: "success",
+                            time: 2000,
+                        });
 
-        //                 resolve();
-        //             })
-        //             .catch((error) => {
-        //                 const notifcationStore = useNotificationStore();
-        //                 notifcationStore.pushNotification({
-        //                     message: "Error Occurred",
-        //                     type: "error",
-        //                     time: 2000,
-        //                 });
+                        resolve();
+                    })
+                    .catch((error) => {
+                        const notifcationStore = useNotificationStore();
+                        notifcationStore.pushNotification({
+                            message: "Error Occurred",
+                            type: "error",
+                            time: 2000,
+                        });
 
-        //                 if (error.response.status == 422) {
-        //                     this.add_income_errors = formatValidationErrors(
-        //                         error.response.data.errors
-        //                     );
-        //                 }
-        //                 reject(error);
-        //             });
-        //     });
-        // },
+                        if (error.response.status == 422) {
+                            this.add_income_errors = formatValidationErrors(
+                                error.response.data.errors
+                            );
+                        }
+                        reject(error);
+                    });
+            });
+        },
 
         // async editBrand(data) {
         //     return new Promise((resolve, reject) => {

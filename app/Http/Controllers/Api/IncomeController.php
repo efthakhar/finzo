@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Income\CreateIncomeRequest;
 use App\Http\Resources\Income\IncomeResource;
 use App\Models\Income;
 use Exception;
@@ -65,23 +66,32 @@ class IncomeController extends Controller
     //     return new BrandResource($brand);
     // }
 
-    // public function store(CreateBrandRequest $request)
-    // {
-    //     try {
-    //         Brand::create($request->validated())
-    //             ->attachMedia($request->logo, 'logo');
-    //     } catch (Exception $e) {
-    //         return response()->json([
-    //             'status' => 'error',
-    //             'message' => 'failed to create brand',
-    //         ], 500);
-    //     }
+    public function store(CreateIncomeRequest $request)
+    {
+        try {
+           
+            $income         = new Income();
+            $income->title  = $request->validated('title');
+            $income->date  = $request->validated('date');
+            $income->amount  = $request->validated('amount');
+            $income->description  = $request->validated('description');
 
-    //     return response()->json([
-    //         'status' => 'success',
-    //         'message' => 'brand created succesfully',
-    //     ], 201);
-    // }
+            $income->save();
+            $income->categories()->attach($request->validated('categories'));
+            
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'failed to create income item',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'income record created succesfully',
+        ], 201);
+    }
 
     // public function update(UpdateBrandRequest $request, $brand_id)
     // {

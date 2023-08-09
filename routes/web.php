@@ -45,13 +45,13 @@ Route::group(['middleware' => ['auth']], function () {
     // User
     Route::get('/api/users/authenticated-user', [UserController::class, 'getAuthenticatedUser']);
 
-    // income
+    // income category
     Route::get('/api/income-categories', [IncomeCategoryController::class, 'getIncomeCategoryList']);
 
     // income
     Route::get('/api/incomes', [IncomeController::class, 'index']);
     // Route::get('/api/incomes/{id}', [IncomeController::class, 'show']);
-    // Route::post('/apiincomeds', [IncomeController::class, 'store']);
+    Route::post('/api/incomes', [IncomeController::class, 'store']);
     // Route::put('/api/incomes/{id}', [IncomeController::class, 'update']);
     Route::delete('/api/incomes/{id}', [IncomeController::class, 'delete']);
 

@@ -11,12 +11,12 @@ import ViewSvgIcon from "../../assets/icons/view-svg-icon.vue";
 import AddNewButton from "../../components/buttons/AddNewButton.vue";
 import FilterButton from "../../components/buttons/FilterButton.vue";
 import BulkDeleteButton from "../../components/buttons/BulkDeleteButton.vue";
-// import AddIncome from "./AddIncome.vue";
+import AddIncome from "./AddIncome.vue";
 // import EditIncome from "./EditIncome.vue";
 // import ViewIncome from "./ViewIncome.vue";
 
 const loading = ref(false);
-const filterTab = ref(true);
+const filterTab = ref(false);
 const showAddIncome = ref(false);
 const showEditIncome = ref(false);
 const showViewIncome = ref(false);
@@ -290,11 +290,12 @@ onMounted(async () => {
             @perPageChange="(perpage) => fetchData(1, perpage)"
         />
         <div class="modals-container">
-            <!-- <AddIncome
+            <AddIncome
+                :categories="incomeCategories"
                 v-if="showAddIncome"
                 @close="showAddIncome = false"
                 @refreshData="fetchData(1)"
-            /> -->
+            />
             <!-- <EditIncome
                 v-if="showEditIncome"
                 :income_id="incomeStore.edit_income_id"
