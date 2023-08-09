@@ -10,15 +10,15 @@ import ViewSvgIcon from "../../assets/icons/view-svg-icon.vue";
 import AddNewButton from "../../components/buttons/AddNewButton.vue";
 import FilterButton from "../../components/buttons/FilterButton.vue";
 import BulkDeleteButton from "../../components/buttons/BulkDeleteButton.vue";
-// import AddIncome from "./AddIncome.vue";
-// import EditIncome from "./EditIncome.vue";
-// import ViewIncome from "./ViewIncome.vue";
+import AddIncomeCat from "./AddIncomeCat.vue";
+// import EditIncomeCat from "./EditIncomeCat.vue";
+// import ViewIncomeCat from "./ViewIncomeCat.vue";
 
 const loading = ref(false);
 const filterTab = ref(true);
-const showAddIncome = ref(false);
-const showEditIncome = ref(false);
-const showViewIncome = ref(false);
+const showAddIncomeCat = ref(false);
+const showEditIncomeCat = ref(false);
+const showViewIncomeCat = ref(false);
 
 const confirmStore = useConfirmStore();
 const incomeCategoryStore = useIncomeCategoryStore();
@@ -65,12 +65,7 @@ async function deleteData(id) {
 
 function openEditIncomeModal(id) {
     incomeCategoryStore.edit_income_id = id;
-    showEditIncome.value = true;
-}
-
-function openViewIncomeModal(id) {
-    incomeCategoryStore.view_income_id = id;
-    showViewIncome.value = true;
+    showEditIncomeCat.value = true;
 }
 
 async function fetchData(
@@ -109,7 +104,7 @@ onMounted(async () => {
                     v-if="selected_income_cats.length > 0"
                     @click="deleteData(selected_income_cats)"
                 />
-                <AddNewButton @click="showAddIncome = true" />
+                <AddNewButton @click="showAddIncomeCat = true" />
                 <FilterButton @click="filterTab = !filterTab" />
             </div>
         </div>
@@ -188,21 +183,21 @@ onMounted(async () => {
             @perPageChange="(perpage) => fetchData(1, perpage)"
         />
         <div class="modals-container">
-            <!-- <AddIncome
-                v-if="showAddIncome"
-                @close="showAddIncome = false"
+            <AddIncomeCat
+                v-if="showAddIncomeCat"
+                @close="showAddIncomeCat = false"
                 @refreshData="fetchData(1)"
-            /> -->
-            <!-- <EditIncome
-                v-if="showEditIncome"
+            />
+            <!-- <EditIncomeCat
+                v-if="showEditIncomeCat"
                 :income_id="incomeCategoryStore.edit_income_id"
-                @close="showEditIncome = false"
+                @close="showEditIncomeCat = false"
                 @refreshData="fetchData(incomeCategoryStore.current_page)"
             /> -->
-            <!-- <ViewIncome
-                v-if="showViewIncome"
+            <!-- <ViewIncomeCat
+                v-if="showViewIncomeCat"
                 :income_id="incomeCategoryStore.view_income_id"
-                @close="showViewIncome = false"
+                @close="showViewIncomeCat = false"
             /> -->
         </div>
     </div>
