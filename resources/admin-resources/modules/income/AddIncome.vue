@@ -2,6 +2,7 @@
 import { computed, onMounted } from "vue";
 import CrossSvgIcon from "../../assets/icons/cross-svg-icon.vue";
 import { useIncomeStore } from "./incomeStore";
+import Multiselect from "@vueform/multiselect";
 
 const emit = defineEmits(["close", "refreshData"]);
 const props = defineProps(["categories"]);
@@ -66,18 +67,14 @@ onMounted(() => {
                             >
                                 {{ incomeStore.add_income_errors.categories }}
                             </p>
-                            <select
-                                class="form-select"
+
+                            <Multiselect
+                                :searchable="true"
+                                mode="tags"
+                                :hide-selected="false"
                                 v-model="income_data.categories"
-                            >
-                                <option value="">none</option>
-                                <option
-                                    :value="category.id"
-                                    v-for="category in categories"
-                                >
-                                    {{ category.name }}
-                                </option>
-                            </select>
+                                :options="categories"
+                            ></Multiselect>
                         </div>
                         <div class="form-item">
                             <label class="my-2">Income Date</label>

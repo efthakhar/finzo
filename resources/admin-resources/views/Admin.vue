@@ -44,3 +44,17 @@ onMounted(async () => {
         </div>
     </div>
 </template>
+
+
+
+
+<style src="@vueform/multiselect/themes/default.css"></style>
+<style>
+.multiselect-tag {background: #5a8dee;}
+.multiselect-option.is-selected,.multiselect-option.is-selected.is-pointed{
+background: #5a8eeea4;
+}
+.multiselect-option.is-selected.is-pointed:hover{
+background: #5a8eee;
+}
+</style>

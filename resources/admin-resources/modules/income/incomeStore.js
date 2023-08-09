@@ -33,7 +33,7 @@ export const useIncomeStore = defineStore("income", {
             amount: "",
             date: "",
             description: "",
-            categories: "",
+            categories: [],
         },
     }),
 
@@ -47,7 +47,7 @@ export const useIncomeStore = defineStore("income", {
                 amount: "",
                 date: "",
                 description: "",
-                categories: "",
+                categories: [],
             };
             this.add_income_errors = [];
             this.edit_income_errors = [];
