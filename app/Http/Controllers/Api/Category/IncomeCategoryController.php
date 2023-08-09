@@ -48,7 +48,7 @@ class IncomeCategoryController extends Controller
 
             $income_cat = new Category();
             $income_cat->name = $request->validated('name');
-            $income_cat->category_type = 'income';  
+            $income_cat->category_type = 'income';
             $income_cat->save();
 
         } catch (Exception $e) {
