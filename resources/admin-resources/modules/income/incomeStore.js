@@ -165,35 +165,35 @@ export const useIncomeStore = defineStore("income", {
         //     });
         // },
 
-        // async deleteBrand(id) {
-        //     return new Promise((resolve, reject) => {
-        //         axios
-        //             .delete(`/api/incomes/${id}`)
-        //             .then((response) => {
-        //                 if (
-        //                     this.incomes.length == 1 ||
-        //                     (Array.isArray(id) &&
-        //                         id.length == this.incomes.length)
-        //                 ) {
-        //                     this.current_page == 1
-        //                         ? (this.current_page = 1)
-        //                         : (this.current_page -= 1);
-        //                 }
+        async deleteIncome(id) {
+            return new Promise((resolve, reject) => {
+                axios
+                    .delete(`/api/incomes/${id}`)
+                    .then((response) => {
+                        if (
+                            this.incomes.length == 1 ||
+                            (Array.isArray(id) &&
+                                id.length == this.incomes.length)
+                        ) {
+                            this.current_page == 1
+                                ? (this.current_page = 1)
+                                : (this.current_page -= 1);
+                        }
 
-        //                 this.resetCurrentBrandData();
-        //                 const notifcationStore = useNotificationStore();
-        //                 notifcationStore.pushNotification({
-        //                     message: "income deleted successfully",
-        //                     type: "success",
-        //                     time: 2000,
-        //                 });
+                        this.resetCurrentIncomeData();
+                        const notifcationStore = useNotificationStore();
+                        notifcationStore.pushNotification({
+                            message: "income deleted successfully",
+                            type: "success",
+                            time: 2000,
+                        });
 
-        //                 resolve(response);
-        //             })
-        //             .catch((error) => {
-        //                 reject(error);
-        //             });
-        //     });
-        // },
+                        resolve(response);
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    });
+            });
+        },
     },
 });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Income\IncomeResource;
 use App\Models\Income;
+use Exception;
 use Illuminate\Http\Request;
 
 class IncomeController extends Controller
@@ -107,24 +108,24 @@ class IncomeController extends Controller
     //     ], 200);
     // }
 
-    // public function delete($ids)
-    // {
-    //     $this->authorize('delete_brand');
+    public function delete($ids)
+    {
+       
+        $ids = explode(',', $ids);
 
-    //     $ids = explode(',', $ids);
+        try {
+            Income::destroy($ids);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'failed to delete income item',
+                'error' => $e->getMessage()
+            ], 500);
+        }
 
-    //     try {
-    //         Brand::destroy($ids);
-    //     } catch (Exception $e) {
-    //         return response()->json([
-    //             'status' => 'error',
-    //             'message' => 'failed to delete brand',
-    //         ], 500);
-    //     }
-
-    //     return response()->json([
-    //         'status' => 'success',
-    //         'message' => 'brand deleted succesfully',
-    //     ], 204);
-    // }
+        return response()->json([
+            'status' => 'success',
+            'message' => 'income item deleted succesfully',
+        ], 204);
+    }
 }

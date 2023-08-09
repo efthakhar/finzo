@@ -43,36 +43,36 @@ function select_all() {
     }
 }
 
-// async function deleteData(id) {
-//     confirmStore
-//         .show_box({ message: "Do you want to delete selected income?" })
-//         .then(async () => {
-//             if (confirmStore.do_action == true) {
-//                 incomeStore.deleteIncome(id).then(() => {
-//                     incomeStore.fetchIncomes(
-//                         incomeStore.current_page,
-//                         incomeStore.limit,
-//                         incomeStore.q_title
-//                     );
+async function deleteData(id) {
+    confirmStore
+        .show_box({ message: "Do you want to delete selected income?" })
+        .then(async () => {
+            if (confirmStore.do_action == true) {
+                incomeStore.deleteIncome(id).then(() => {
+                    incomeStore.fetchIncomes(
+                        incomeStore.current_page,
+                        incomeStore.limit,
+                        incomeStore.q_title
+                    );
 
-//                     if (Array.isArray(id)) {
-//                         all_selectd.value = false;
-//                         selected_incomes.value = [];
-//                     }
-//                 });
-//             }
-//         });
-// }
+                    if (Array.isArray(id)) {
+                        all_selectd.value = false;
+                        selected_incomes.value = [];
+                    }
+                });
+            }
+        });
+}
 
-// function openEditIncomeModal(id) {
-//     incomeStore.edit_income_id = id;
-//     showEditIncome.value = true;
-// }
+function openEditIncomeModal(id) {
+    incomeStore.edit_income_id = id;
+    showEditIncome.value = true;
+}
 
-// function openViewIncomeModal(id) {
-//     incomeStore.view_income_id = id;
-//     showViewIncome.value = true;
-// }
+function openViewIncomeModal(id) {
+    incomeStore.view_income_id = id;
+    showViewIncome.value = true;
+}
 
 async function fetchData(
     page = incomeStore.current_page,

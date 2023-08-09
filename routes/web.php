@@ -53,6 +53,6 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::get('/api/incomes/{id}', [IncomeController::class, 'show']);
     // Route::post('/apiincomeds', [IncomeController::class, 'store']);
     // Route::put('/api/incomes/{id}', [IncomeController::class, 'update']);
-    // Route::delete('/api/incomes/{id}', [IncomeController::class, 'delete']);
+    Route::delete('/api/incomes/{id}', [IncomeController::class, 'delete']);
 
 });
