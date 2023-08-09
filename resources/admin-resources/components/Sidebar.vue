@@ -20,6 +20,10 @@ const navlinks = [
                 label: "income list",
                 link: "/admin/incomes",
             },
+            {
+                label: "income categories",
+                link: "/admin/income-categories",
+            },
         ],
     },
 

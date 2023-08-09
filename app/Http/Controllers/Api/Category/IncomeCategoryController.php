@@ -96,7 +96,9 @@ class IncomeCategoryController extends Controller
         $ids = explode(',', $ids);
 
         try {
-            Category::where('category_type', 'income')->destroy($ids);
+            foreach ($ids as $id) {
+                Category::where('category_type', 'income')->where('id', $id)->delete();
+            }
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',

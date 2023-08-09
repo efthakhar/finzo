@@ -3,7 +3,7 @@ import formatValidationErrors from "../../utils/format-validation-errors";
 import { defineStore } from "pinia";
 import { useNotificationStore } from "../../components/shared/notification/notificationStore";
 
-export const useIncomeCatCategoryStore = defineStore("incomeCategory", {
+export const useIncomeCategoryStore = defineStore("income_category", {
     state: () => ({
         current_page: 1,
         total_pages: 0,
@@ -29,7 +29,7 @@ export const useIncomeCatCategoryStore = defineStore("incomeCategory", {
     getters: {},
 
     actions: {
-        resetCurrentIncomeCatCategoryData() {
+        resetCurrentIncomeCatData() {
             this.current_income_category_item = {
                 id: "",
                 name: "",
@@ -51,7 +51,7 @@ export const useIncomeCatCategoryStore = defineStore("incomeCategory", {
             });
         },
 
-        fetchIncomeCatCats(page, limit, q_name = "") {
+        fetchIncomeCats(page, limit, q_name = "") {
             return new Promise((resolve, reject) => {
                 axios
                     .get(

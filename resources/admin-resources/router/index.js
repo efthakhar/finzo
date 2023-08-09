@@ -24,6 +24,12 @@ const router = createRouter({
                     path: "incomes",
                     component: () => import("../modules/income/Incomes.vue"),
                 },
+                // Incomes Category Route
+                {
+                    name: "income_categories",
+                    path: "income-categories",
+                    component: () => import("../modules/income-category/IncomeCategories.vue"),
+                },
 
 
 
