@@ -6,11 +6,17 @@ import { useIncomeCategoryStore } from "./incomeCategoryStore";
 const emit = defineEmits(["close", "refreshData"]);
 
 const incomeCategoryStore = useIncomeCategoryStore();
-const income_category_data = computed(() => incomeCategoryStore.current_income_category_item);
+const income_category_data = computed(
+    () => incomeCategoryStore.current_income_category_item
+);
 
 async function submitData() {
     incomeCategoryStore
-        .addIncomeCat(JSON.parse(JSON.stringify(incomeCategoryStore.current_income_category_item)))
+        .addIncomeCat(
+            JSON.parse(
+                JSON.stringify(incomeCategoryStore.current_income_category_item)
+            )
+        )
         .then(() => {
             emit("refreshData");
             emit("close");
@@ -35,7 +41,7 @@ onMounted(() => {
         <div class="modal-dialog modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Add New Income Cat</h5>
+                    <h5 class="modal-title">Add New Income Category</h5>
                     <button type="button" class="close">
                         <CrossSvgIcon @click="closeAddIncomeCatModal" />
                     </button>
@@ -47,9 +53,15 @@ onMounted(() => {
                             <label class="my-2">Income Category Name</label>
                             <p
                                 class="text-danger"
-                                v-if="incomeCategoryStore.add_income_category_errors.name"
+                                v-if="
+                                    incomeCategoryStore
+                                        .add_income_category_errors.name
+                                "
                             >
-                                {{ incomeCategoryStore.add_income_category_errors.name }}
+                                {{
+                                    incomeCategoryStore
+                                        .add_income_category_errors.name
+                                }}
                             </p>
                             <input
                                 type="text"
@@ -57,7 +69,6 @@ onMounted(() => {
                                 v-model="income_category_data.name"
                             />
                         </div>
-                       
                     </form>
                 </div>
 

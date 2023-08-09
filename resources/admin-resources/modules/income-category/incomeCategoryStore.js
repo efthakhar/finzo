@@ -109,9 +109,9 @@ export const useIncomeCategoryStore = defineStore("income_category", {
                             type: "error",
                             time: 2000,
                         });
-
+                        
                         if (error.response.status == 422) {
-                            this.add_income_errors = formatValidationErrors(
+                            this.add_income_category_errors = formatValidationErrors(
                                 error.response.data.errors
                             );
                         }
@@ -123,7 +123,7 @@ export const useIncomeCategoryStore = defineStore("income_category", {
         async editIncomeCat(data) {
             return new Promise((resolve, reject) => {
                 axios
-                    .put(`/api/income-categories/${this.edit_income_id}`, data)
+                    .put(`/api/income-categories/${this.edit_income_category_id}`, data)
                     .then((response) => {
                         this.resetCurrentIncomeCatData();
                         const notifcationStore = useNotificationStore();
@@ -142,7 +142,7 @@ export const useIncomeCategoryStore = defineStore("income_category", {
                         });
 
                         if (errors.response.status == 422) {
-                            this.edit_income_errors = formatValidationErrors(
+                            this.edit_income_category_errors = formatValidationErrors(
                                 errors.response.data.errors
                             );
                         }

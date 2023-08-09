@@ -195,13 +195,13 @@ onMounted(async () => {
             />
             <EditIncomeCat
                 v-if="showEditIncomeCat"
-                :income_category_id="incomeCategoryStore.edit_income_id"
+                :income_category_id="incomeCategoryStore.edit_income_category_id"
                 @close="showEditIncomeCat = false"
                 @refreshData="fetchData(incomeCategoryStore.current_page)"
             />
             <ViewIncomeCat
                 v-if="showViewIncomeCat"
-                :income_category_id="incomeCategoryStore.edit_income_id"
+                :income_category_id="incomeCategoryStore.view_income_category_id"
                 @close="showViewIncomeCat = false"
             />
         </div>
