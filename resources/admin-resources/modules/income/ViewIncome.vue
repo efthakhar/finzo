@@ -97,21 +97,6 @@ onMounted(async () => {
                     </div>
                 </div>
 
-                <div class="modal-footer">
-                    <button
-                        class="btn btn-danger btn-sm"
-                        @click="closeViewIncomeModal"
-                    >
-                        Cancel
-                    </button>
-                    <button
-                        type="submit"
-                        class="btn btn-primary ml-1 btn-sm"
-                        @click="submitData"
-                    >
-                        Save
-                    </button>
-                </div>
             </div>
         </div>
     </div>

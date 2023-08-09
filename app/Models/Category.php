@@ -13,6 +13,6 @@ class Category extends Model
 
     public function incomes()
     {
-        return $this->morphedByMany(Income::class, 'categoryable');
+        return $this->morphedByMany(Income::class, 'categorizable');
     }
 }

@@ -131,7 +131,11 @@ class IncomeController extends Controller
         $ids = explode(',', $ids);
 
         try {
-            Income::destroy($ids);
+            foreach ($ids as $id) {
+                $income = Income::where('id', $id)->first();
+                $income->categories()->detach();
+                $income->delete();
+            }
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',

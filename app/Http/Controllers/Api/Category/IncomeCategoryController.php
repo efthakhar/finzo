@@ -92,12 +92,17 @@ class IncomeCategoryController extends Controller
 
     public function delete($ids)
     {
-
         $ids = explode(',', $ids);
 
         try {
             foreach ($ids as $id) {
-                Category::where('category_type', 'income')->where('id', $id)->delete();
+
+                $category = Category::where('category_type', 'income')->where('id', $id)->first();
+                if($category->incomes()->count()>0){
+                    throw new Exception("Cannot delete category. It is associated with income models.");
+                }else{
+                    $category->delete();
+                }
             }
         } catch (Exception $e) {
             return response()->json([

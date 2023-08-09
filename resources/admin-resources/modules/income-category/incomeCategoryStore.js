@@ -78,15 +78,7 @@ export const useIncomeCategoryStore = defineStore("income_category", {
                 axios
                     .get(`/api/income-categories/${id}`)
                     .then((response) => {
-                        this.urrent_income_category_item = response.data.data;
-
-                        this.urrent_income_category_item.categories_details =
-                            response.data.data.categories;
-
-                        this.urrent_income_category_item.categories =
-                            response.data.data.categories.map(
-                                (item) => item.value
-                            );
+                        this.current_income_category_item = response.data.data;
                         resolve(response.data.data);
                     })
                     .catch((errors) => {

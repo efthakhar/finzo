@@ -9,13 +9,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('categorizables', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('categorizable_id');
-            $table->string('categorizable_type');
-            $table->timestamps();
-
-            $table->unique(['category_id', 'categorizable_id', 'categorizable_type'], 'categorizables_unique');
+            $table->foreignId('category_id')->constrained();
+            $table->morphs('categorizable');
         });
     }
 
