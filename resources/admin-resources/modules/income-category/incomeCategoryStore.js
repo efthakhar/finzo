@@ -43,7 +43,7 @@ export const useIncomeCategoryStore = defineStore("incomeCategory", {
         fetchCatList() {
             return new Promise((resolve, reject) => {
                 axios
-                    .get(`/api/income-categories`)
+                    .get(`/api/income-categories/list`)
                     .then((response) => {
                         resolve(response.data.data);
                     })

@@ -46,7 +46,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/api/users/authenticated-user', [UserController::class, 'getAuthenticatedUser']);
 
     // income category
-    Route::get('/api/income-categories', [IncomeCategoryController::class, 'getIncomeCategoryList']);
+    Route::get('/api/income-categories/list', [IncomeCategoryController::class, 'getIncomeCategoryList']);
+    Route::get('/api/income-categories', [IncomeCategoryController::class, 'index']);
+    Route::get('/api/income-categories/{id}', [IncomeCategoryController::class, 'show']);
+    Route::post('/api/income-categories', [IncomeCategoryController::class, 'store']);
+    Route::put('/api/income-categories/{id}', [IncomeCategoryController::class, 'update']);
+    Route::delete('/api/income-categories/{id}', [IncomeCategoryController::class, 'delete']);
 
     // income
     Route::get('/api/incomes', [IncomeController::class, 'index']);
