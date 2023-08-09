@@ -98,9 +98,9 @@ class ExpenseCategoryController extends Controller
             foreach ($ids as $id) {
 
                 $category = Category::where('category_type', 'expense')->where('id', $id)->first();
-                if($category->expenses()->count()>0){
-                    throw new Exception("Cannot delete category. It is associated with expense models.");
-                }else{
+                if ($category->expenses()->count() > 0) {
+                    throw new Exception('Cannot delete category. It is associated with expense models.');
+                } else {
                     $category->delete();
                 }
             }

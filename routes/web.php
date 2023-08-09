@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\Category\IncomeCategoryController;
-use App\Http\Controllers\Api\IncomeController;
 use App\Http\Controllers\Api\Category\ExpenseCategoryController;
+use App\Http\Controllers\Api\Category\IncomeCategoryController;
 use App\Http\Controllers\Api\ExpenseController;
+use App\Http\Controllers\Api\IncomeController;
 use App\Http\Controllers\Api\User\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -61,7 +61,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/api/incomes', [IncomeController::class, 'store']);
     Route::put('/api/incomes/{id}', [IncomeController::class, 'update']);
     Route::delete('/api/incomes/{id}', [IncomeController::class, 'delete']);
-
 
     // expense category
     Route::get('/api/expense-categories/list', [ExpenseCategoryController::class, 'getExpenseCategoryList']);

@@ -98,9 +98,9 @@ class IncomeCategoryController extends Controller
             foreach ($ids as $id) {
 
                 $category = Category::where('category_type', 'income')->where('id', $id)->first();
-                if($category->incomes()->count()>0){
-                    throw new Exception("Cannot delete category. It is associated with income models.");
-                }else{
+                if ($category->incomes()->count() > 0) {
+                    throw new Exception('Cannot delete category. It is associated with income models.');
+                } else {
                     $category->delete();
                 }
             }

@@ -33,7 +33,7 @@ class ExpenseSeeder extends Seeder
             'description' => '',
             'category' => 5,
             'amount' => 1200,
-        ]
+        ],
 
     ];
 
