@@ -99,17 +99,27 @@ class IncomeCategoryController extends Controller
 
                 $category = Category::where('category_type', 'income')->where('id', $id)->first();
                 if ($category->incomes()->count() > 0) {
-                    throw new Exception('Cannot delete category. It is associated with income models.');
+                    throw new Exception('Cannot delete category.',582);
                 } else {
                     $category->delete();
                 }
             }
         } catch (Exception $e) {
+            
+            if ($e->getCode() == 582) {
+                return response()->json([
+                'status' => 'error',
+                'message' => 'failed to delete income category',
+                'error' => $e->getMessage(),
+            ], 582);
+            }
+
             return response()->json([
                 'status' => 'error',
                 'message' => 'failed to delete income category',
                 'error' => $e->getMessage(),
             ], 500);
+
         }
 
         return response()->json([

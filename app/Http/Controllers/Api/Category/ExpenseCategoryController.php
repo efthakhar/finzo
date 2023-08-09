@@ -99,12 +99,21 @@ class ExpenseCategoryController extends Controller
 
                 $category = Category::where('category_type', 'expense')->where('id', $id)->first();
                 if ($category->expenses()->count() > 0) {
-                    throw new Exception('Cannot delete category. It is associated with expense models.');
+                    throw new Exception('Cannot delete category. It is associated with expense models.',582);
                 } else {
                     $category->delete();
                 }
             }
         } catch (Exception $e) {
+            
+            if ($e->getCode() == 582) {
+                return response()->json([
+                'status' => 'error',
+                'message' => 'failed to delete expanse category',
+                'error' => $e->getMessage(),
+            ], 582);
+            }
+
             return response()->json([
                 'status' => 'error',
                 'message' => 'failed to delete expense category',

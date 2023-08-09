@@ -138,7 +138,6 @@ export const useExpenseCategoryStore = defineStore("expense_category", {
                         resolve(response);
                     })
                     .catch((errors) => {
-                        console.log(errors);
                         const notifcationStore = useNotificationStore();
                         notifcationStore.pushNotification({
                             message: "Error Occurred",
@@ -181,8 +180,16 @@ export const useExpenseCategoryStore = defineStore("expense_category", {
 
                         resolve(response);
                     })
-                    .catch((error) => {
-                        reject(error);
+                    .catch((errors) => {
+                        if (errors.response.status == 582) {
+                            const notifcationStore = useNotificationStore();
+                            notifcationStore.pushNotification({
+                                message: "Cannot delete category. It is associated with non zero expense records. Delete that expenses first.",
+                                type: "error",
+                                time: 5000,
+                            });
+                        }
+                        reject(errors);
                     });
             });
         },
